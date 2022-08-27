@@ -1,12 +1,24 @@
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:workmanager/workmanager.dart';
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Workmanager().cancelAll();
   await Workmanager().initialize(callBackDispatcher);
-  Workmanager().registerPeriodicTask("bbb", "ccc" , frequency: const Duration(minutes: 9));
+  if (Platform.isAndroid) {
+    Workmanager().registerPeriodicTask("bbb", "ccc",
+        frequency: const Duration(minutes: 9));
+  } else {
+    Workmanager().registerOneOffTask("abc", "abc",
+        initialDelay: const Duration(minutes: 5));
+    Workmanager().registerOneOffTask("abb", "abb",
+        initialDelay: const Duration(minutes: 5));
+  }
 
   runApp(const MyApp());
 }
@@ -28,7 +40,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
@@ -45,23 +56,25 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
-@override
+
+  @override
   void initState() {
-  var android =  const AndroidInitializationSettings('@mipmap/ic_launcher');
-  var iOS =  const IOSInitializationSettings();
-  var initSettings =  InitializationSettings(android: android, iOS: iOS);
-  flutterLocalNotificationsPlugin.initialize(initSettings,
-      onSelectNotification: (p){
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: const Text('Notification'),
-            content: Text('$p'),
-          ),
-        );
-      });
+    var android = const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var iOS = const IOSInitializationSettings();
+    var initSettings = InitializationSettings(android: android, iOS: iOS);
+    flutterLocalNotificationsPlugin.initialize(initSettings,
+        onSelectNotification: (p) {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Notification'),
+          content: Text('$p'),
+        ),
+      );
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,18 +103,21 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 showNotification() async {
-  var android = const AndroidNotificationDetails(
-      'channel id', 'channel NAME', channelDescription: 'CHANNEL DESCRIPTION',
-      priority: Priority.high,importance: Importance.max
-  );
+  var android = const AndroidNotificationDetails('channel id', 'channel NAME',
+      channelDescription: 'CHANNEL DESCRIPTION',
+      priority: Priority.high,
+      importance: Importance.max);
   var iOS = const IOSNotificationDetails();
-  var platform = NotificationDetails(android: android,iOS:  iOS);
+  var platform = NotificationDetails(android: android, iOS: iOS);
   await flutterLocalNotificationsPlugin.show(
       0, 'New Video is out', 'Flutter Local Notification', platform,
       payload: 'Nitish Kumar Singh is part time Youtuber');
 }
+
 void callBackDispatcher() {
+  print('task running');
   Workmanager().executeTask((taskName, inputData) {
     print(taskName);
     print(inputData);
