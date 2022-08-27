@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1983978941/android.workmanager.iml" filepath="$PROJECT_DIR$/.idea/modules/1983978941/android.workmanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1983978941/android.workmanager.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/1983978941/android.workmanager.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1983978941/android.workmanager.main.iml" filepath="$PROJECT_DIR$/.idea/modules/1983978941/android.workmanager.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1983978941/android.workmanager.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/1983978941/android.workmanager.unitTest.iml" />
+    </modules>
+  </component>
+</project>
